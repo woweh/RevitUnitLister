@@ -100,8 +100,11 @@ namespace RevitUnitLister
                     UnitSymbol = _symbolLoader.GetSymbol(unitTypeId.TypeId)
                 };
 
-                unitData.ConversionFactor =
-                    GetConversionFactor(unitTypeId, unitData.DisplayName, dataData);
+                unitData.ConversionFromInternal =
+                    GetConversionFromInternal(unitTypeId, unitData.DisplayName, dataData);
+
+                unitData.ConversionToInternal =
+                    GetConversionToInternal(unitTypeId, unitData.DisplayName, dataData);
 
                 // HashSet automatically prevents duplicates
                 if (!quantityData.Units.Add(unitData))
@@ -140,7 +143,7 @@ namespace RevitUnitLister
         /// <summary>
         /// Get conversion factor for a unit
         /// </summary>
-        private static double GetConversionFactor(ForgeTypeId unitTypeId, string displayName,
+        private static double GetConversionFromInternal(ForgeTypeId unitTypeId, string displayName,
             RevitUnitsData dataData)
         {
             try
@@ -150,6 +153,23 @@ namespace RevitUnitLister
             catch (Exception ex)
             {
                 dataData.Warnings.Add($"Failed to get conversion factor for unit '{displayName}': {ex.Message}");
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Get conversion factor to internal units for a unit
+        /// </summary>
+        private static double GetConversionToInternal(ForgeTypeId unitTypeId, string displayName,
+            RevitUnitsData dataData)
+        {
+            try
+            {
+                return UnitUtils.ConvertToInternalUnits(1.0, unitTypeId);
+            }
+            catch (Exception ex)
+            {
+                dataData.Warnings.Add($"Failed to get conversion factor to internal units for unit '{displayName}': {ex.Message}");
                 return 0;
             }
         }

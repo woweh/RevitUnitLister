@@ -38,7 +38,7 @@ namespace RevitUnitLister
             using (var writer = new StreamWriter(filePath, false, Encoding.UTF8))
             {
                 // Write header
-                writer.WriteLine("Quantity,Discipline,Quantity TypeId,Type Catalog String,Unit Name,Unit TypeId,Unit Symbol,Conversion Factor,Is Valid");
+                writer.WriteLine("Quantity,Discipline,Quantity TypeId,Type Catalog String,Unit Name,Unit TypeId,Unit Symbol,Conversion Factor From Internal,Conversion Factor To Internal,Is Valid");
 
                 // Write data rows
                 foreach (var quantity in data.Quantities)
@@ -46,7 +46,7 @@ namespace RevitUnitLister
                     foreach (var unit in quantity.Units)
                     {
                         writer.WriteLine(
-            $"\"{quantity.DisplayName}\",\"{quantity.DisciplineName}\",\"{quantity.TypeId}\",\"{quantity.TypeCatalogString}\",\"{unit.DisplayName}\",\"{unit.TypeId}\",\"{unit.UnitSymbol}\",{unit.ConversionFactor},{unit.IsValidUnit}");
+            $"\"{quantity.DisplayName}\",\"{quantity.DisciplineName}\",\"{quantity.TypeId}\",\"{quantity.TypeCatalogString}\",\"{unit.DisplayName}\",\"{unit.TypeId}\",\"{unit.UnitSymbol}\",{unit.ConversionFromInternal},{unit.ConversionToInternal},{unit.IsValidUnit}");
                     }
                 }
             }

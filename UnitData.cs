@@ -9,7 +9,8 @@ namespace RevitUnitLister
     {
         public string TypeId { get; set; }
         public string DisplayName { get; set; }
-        public double ConversionFactor { get; set; }
+        public double ConversionFromInternal { get; set; }
+        public double ConversionToInternal { get; set; }
         public string UnitSymbol { get; set; }
         public bool IsValidUnit { get; set; }
 

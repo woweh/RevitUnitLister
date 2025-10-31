@@ -93,7 +93,7 @@
                         <DataGridTextColumn Header="Unit Name" Binding="{Binding DisplayName}" Width="*" />
                         <DataGridTextColumn Header="Symbol" Binding="{Binding UnitSymbol}" Width="80" />
                         <DataGridTextColumn Header="Conversion Factor"
-                                            Binding="{Binding ConversionFactor, StringFormat=F6}"
+                                            Binding="{Binding ConversionFromInternal, StringFormat=F6}"
                                             Width="120" />
                         <DataGridTextColumn Header="Type ID" Binding="{Binding TypeId}" Width="*" />
                     </DataGrid.Columns>
